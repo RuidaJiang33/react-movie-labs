@@ -13,7 +13,7 @@ const App = () => {
         <Route path="*" element={ <Navigate to="/" /> } />
       </Routes>
     </BrowserRouter>
-  );
+  );  
 };
 
 const rootElement = createRoot( document.getElementById("root") )

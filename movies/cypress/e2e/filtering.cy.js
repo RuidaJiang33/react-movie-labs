@@ -1,4 +1,4 @@
-import { filterByGenre, filterByTitle } from "../support/e2e";
+import { filterByCombined, filterByGenre, filterByTitle } from "../support/e2e";
 
 let movies; // List of Discover movies from TMDB
 
@@ -40,8 +40,8 @@ describe("Filtering", () => {
   });
   describe("By movie genre", () => {
     it("show movies with the selected genre", () => {
-      const selectedGenreId = 35;
-      const selectedGenreText = "Comedy";
+      const selectedGenreId = 18;
+      const selectedGenreText = "Drama";
       const matchingMovies = filterByGenre(movies, selectedGenreId);
       cy.get("#genre-select").click();
       cy.get("li").contains(selectedGenreText).click();
@@ -55,6 +55,21 @@ describe("Filtering", () => {
     });
   });
   describe("Combined genre and title", () => {
-    // TODO
+    it("only display movies with 'm' in the title and the selected genre", () => {
+      const searchString = "m";
+      const selectedGenreId = 18;
+      const selectedGenreText = "Drama";
+      const matchingMovies = filterByCombined(movies, searchString, selectedGenreId)
+      cy.get("#filled-search").clear().type(searchString); // Enter m in text box
+      cy.get("#genre-select").click();
+      cy.get("li").contains(selectedGenreText).click();
+      cy.get(".MuiCardHeader-content").should(
+        "have.length",
+        matchingMovies.length
+      );
+      cy.get(".MuiCardHeader-content").each(($card, index) => {
+        cy.wrap($card).find("p").contains(matchingMovies[index].title);
+      });
+    });
   });
 });

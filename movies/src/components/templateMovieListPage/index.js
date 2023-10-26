@@ -4,10 +4,7 @@ import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid";
 
-function MovieListPageTemplate( props ) {
-  const movies = props.movies
-  const title = props.title
-  const selectFavorite = props.selectFavorite
+function MovieListPageTemplate({ movies, title, action }) {
     
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
@@ -39,7 +36,7 @@ function MovieListPageTemplate( props ) {
             genreFilter={genreFilter}
           />
         </Grid>
-        <MovieList selectFavorite={selectFavorite} movies={displayedMovies}></MovieList>
+        <MovieList action={action} movies={displayedMovies}></MovieList>
       </Grid>
     </Grid>
   );

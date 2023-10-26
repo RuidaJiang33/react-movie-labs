@@ -3,13 +3,11 @@ import PageTemplate from "../components/templateMovieListPage";
 import { getUpcoming } from "../api/tmdb-api";
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
-import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd'
+import AddToMustWatchesIcon from '../components/cardIcons/addToMustWatches'
 
 const UpcomingMoviesPage = (props) => {
 
   const { data, error, isLoading, isError } = useQuery('upcoming', getUpcoming)
-
-  console.log(data)
 
   if (isLoading) {
     return <Spinner />
@@ -27,7 +25,7 @@ const UpcomingMoviesPage = (props) => {
       action={(movie) => {
         return (
           <>
-            <PlaylistAddIcon movie={movie} />
+            <AddToMustWatchesIcon movie={movie} />
           </>
         )
       }}

@@ -22,12 +22,14 @@ describe("Base tests", () => {
     it("displays the page header and 20 movies", () => {
       cy.get("h3").contains("Discover Movies");
       cy.get(".MuiCardHeader-root").should("have.length", 20);
+      cy.log('Tested page header and movies functionality');
     });
 
     it("displays the correct movie titles", () => {
       cy.get(".MuiCardHeader-content").each(($card, index) => {
         cy.wrap($card).find("p").contains(movies[index].title);
       });
+      cy.log('Tested movie titles functionality');
     });
   });
   describe("The Movie Details page", () => {

@@ -30,7 +30,6 @@ const HomePage = (props) => {
         return <AddToFavoritesIcon movie={movie} />
       }}
     />
-    // <Button/>
   );
 };
 export default HomePage;

@@ -46,7 +46,7 @@ const SiteHeader = () => {
   ];
 
   const peopleOptions = [
-    { label: "Popular", path: "/" },
+    { label: "Popular", path: "/people" },
   ];
 
   const userOptions = [

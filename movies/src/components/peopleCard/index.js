@@ -13,7 +13,7 @@ export default function PeopleCard({ people, action }) {
       <Card sx={{ maxWidth: 500 }}>
 
         <CardActionArea>
-          <Link to={`/`}>
+          <Link to={`/people/${people.id}`}>
             <CardMedia
               component="img"
               height="300"

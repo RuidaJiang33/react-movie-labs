@@ -7,6 +7,8 @@ import { useQueries } from "react-query";
 import Spinner from '../spinner'
 import Typography from "@mui/material/Typography";
 import Box from '@mui/material/Box';
+import { Link } from "react-router-dom";
+import PeopleDetailHeader from "../headerPeopleDetail";
 
 
 const PeopleDetails = ({ people, children }) => {
@@ -31,10 +33,12 @@ const PeopleDetails = ({ people, children }) => {
   const itemData = movies.slice(0, 6).map(movie => ({
     img: `${movie.poster_path}`,
     title: movie.title,
+    id: movie.id
   }));
-  console.log(itemData)
+
   return (
     <>
+      <PeopleDetailHeader people={people} />
       <Grid container sx={{ padding: "15px", paddingLeft: "100px", paddingRight: "150px" }}>
         <Grid item xs={3}>
           <div sx={{
@@ -61,7 +65,6 @@ const PeopleDetails = ({ people, children }) => {
             </Box>
           </div>
         </Grid>
-
         <Grid item xs={9}>
           <Box sx={{ padding: '15px' }}>
             <Typography variant="h4" gutterBottom>
@@ -75,20 +78,22 @@ const PeopleDetails = ({ people, children }) => {
             </Typography>
           </Box>
           <Typography variant="h5" sx={{ paddingLeft: '15px' }}>Movie Credits</Typography>
-          <ImageList sx={{ width: 1000, height: 400, paddingLeft: '15px' }} cols={6} rowHeight={164}>
+
+          <ImageList sx={{ width: '100%', height: 285, paddingLeft: '15px', overflowX: 'hidden' }} cols={6}>
             {itemData.map((item) => (
-              <ImageListItem key={item.img}>
-                <img
-                  srcSet={`https://image.tmdb.org/t/p/w500/${item.img}`}
-                  src={`https://image.tmdb.org/t/p/w500/${item.img}`}
-                  alt={item.title}
-                  loading="lazy"
-                />
-                <Typography align="center">{item.title}</Typography>
-              </ImageListItem>      
+              <Link key={item.id} to={`/movies/${item.id}`} style={{ textDecoration: 'none' }}>
+                <ImageListItem key={item.img}>
+                  <img
+                    srcSet={`https://image.tmdb.org/t/p/w500/${item.img}`}
+                    src={`https://image.tmdb.org/t/p/w500/${item.img}`}
+                    alt={item.title}
+                    loading="lazy"
+                  />
+                  <Typography align="center" color='black'>{item.title}</Typography>
+                </ImageListItem>
+              </Link>
             ))}
           </ImageList>
-
           {children}
         </Grid>
       </Grid>

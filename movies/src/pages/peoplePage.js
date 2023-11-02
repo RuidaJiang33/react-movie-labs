@@ -15,11 +15,10 @@ const PeoplePage = () => {
   }
 
   const people = data.results;
-
   console.log(people)
   return (
     <PageTemplate
-      title="Trending People"
+      title="Popular People"
       people={people}
     />
   );

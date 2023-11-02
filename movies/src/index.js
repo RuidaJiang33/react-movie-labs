@@ -16,6 +16,8 @@ import TopRatedMoviesPage from './pages/topRatedMoviesPage';
 import PeoplePage from './pages/peoplePage';
 import PeopleDetailsPage from './pages/peopleDetailsPage'
 import PeopleImagesPage from './pages/peopleImagesPage'
+import LoginPage from './pages/loginPage'
+import SignupPage from './pages/signupPage'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,6 +46,8 @@ const App = () => {
             <Route path="/people/:id/images" element={<PeopleImagesPage />} />
             <Route path="/people/:id" element={<PeopleDetailsPage />} />
             <Route path="/people" element={<PeoplePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

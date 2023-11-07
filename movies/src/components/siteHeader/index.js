@@ -11,12 +11,14 @@ import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useAuth } from '../../contexts/authContext';
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [activeButton, setActiveButton] = useState(null);
+  const { logout } = useAuth();
 
   const open = Boolean(anchorEl);
 
@@ -39,8 +41,13 @@ const SiteHeader = () => {
     setActiveButton(null);
   };
 
+  const handleLogOut = () => {
+    logout();
+    navigate('/');
+  }
+
   const moviesOptions = [
-    { label: "Home", path: "/" },
+    { label: "Home", path: "/home" },
     { label: "UpComing", path: "/movies/upcoming" },
     { label: "TopRated", path: "/movies/topRated" },
   ];
@@ -100,6 +107,7 @@ const SiteHeader = () => {
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             All you ever wanted to know about Movies!
           </Typography>
+          
           {isMobile ? renderMobileMenu() : renderButtons()}
           <Menu
             id="menu-appbar"
@@ -117,6 +125,7 @@ const SiteHeader = () => {
               </MenuItem>
             ))}
           </Menu>
+          <Button color="inherit" onClick={handleLogOut}>Log out</Button>
         </Toolbar>
       </AppBar>
       <Offset />

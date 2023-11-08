@@ -119,9 +119,11 @@ export const getTopRated = () => {
     });
 }
 
-export const getPeopleList = () => {
+export const getPeopleList = (args) => {
+  const [, pagePart] = args.queryKey;
+  const { page } = pagePart;
   return fetch(
-    `https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+    `https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${page}`
     )
     .then((response) => {
       if (!response.ok) {
@@ -135,6 +137,7 @@ export const getPeopleList = () => {
 }
 
 export const getPeople = (args) => {
+  console.log(args)
   const [, idPart] = args.queryKey;
   const { id } = idPart;
   return fetch(

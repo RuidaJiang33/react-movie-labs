@@ -46,7 +46,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function FilterPeople(props) {
 
-  const { data, error, isLoading, isError } = useQuery("people", getPeopleList);
+  const { data, error, isLoading, isError } = useQuery(["people", { page: 1 }], getPeopleList);
 
   if (isLoading) {
     return <Spinner />;
@@ -62,7 +62,7 @@ export default function FilterPeople(props) {
   if (people[0].name !== "All") {
     people.unshift({ id: "0", name: "All" });
   }
-  console.log(people[0].name)
+
   const handleChange = (e, type, value) => {
     e.preventDefault();
     props.onUserInput(type, value); // NEW

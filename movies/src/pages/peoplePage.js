@@ -1,11 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { getPeopleList } from "../api/tmdb-api";
 import PageTemplate from '../components/templatePeopleListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
+import { Pagination } from '@mui/material';
+import { Grid } from '@mui/material';
+
 
 const PeoplePage = () => {
-  const { data, error, isLoading, isError } = useQuery('people', getPeopleList)
+  const { page } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location)
+  const queryParams = new URLSearchParams(location.search);
+  console.log(queryParams)
+  const initialPage = Number(queryParams.get('page')) || 1;
+
+  const { data, error, isLoading, isError, refetch } = useQuery(['people', { page }], getPeopleList)
+
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const totalPages = 10;
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+    refetch({ page: newPage });
+    navigate(`/people/page/${newPage}`);
+  };
+
+  const Paginator = ({ currentPage, totalPages, onPageChange }) => {
+    return (
+      <Pagination
+        count={totalPages}
+        page={currentPage}
+        onChange={(event, page) => onPageChange(page)}
+      />
+    );
+  };
+
+  useEffect(() => {
+    if (!page) {
+      navigate('/people/page/1');
+    }
+  }, [page, navigate]);
 
   if (isLoading) {
     return <Spinner />
@@ -15,12 +52,23 @@ const PeoplePage = () => {
   }
 
   const people = data.results;
-  console.log(people)
+
   return (
-    <PageTemplate
-      title="Popular People"
-      people={people}
-    />
+    <>
+      <PageTemplate
+        title="Popular People"
+        people={people}
+      />
+      <Grid container justifyContent="center">
+        <Grid item>
+          <Paginator
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </Grid>
+      </Grid>
+    </>
   );
 };
 export default PeoplePage;

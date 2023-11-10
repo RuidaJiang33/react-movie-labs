@@ -104,7 +104,6 @@ export const getUpcoming = () => {
 };
 
 export const getTopRated = () => {
-
   return fetch(
     `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
   )
@@ -137,7 +136,6 @@ export const getPeopleList = (args) => {
 }
 
 export const getPeople = (args) => {
-  console.log(args)
   const [, idPart] = args.queryKey;
   const { id } = idPart;
   return fetch(

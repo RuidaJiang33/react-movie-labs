@@ -15,7 +15,7 @@ before(() => {
     });
 });
 beforeEach(() => {
-  cy.visit("/");
+  cy.visit("/home");
 });
 describe("The review feature",() => {
   before(() => {
@@ -34,8 +34,8 @@ describe("The review feature",() => {
   });
   it("displays the movie reviews", () => {
     cy.get("button").contains("Reviews").click();
-    cy.get('[href="/reviews/65225638ea84c7012d6ba258"]').contains("Full Review").click();
-    cy.url().should("include",`http://localhost:3000/reviews/65225638ea84c7012d6ba258`)
+    cy.get('a[href="/reviews/64a971123e2ec800cbcd3af9"]').click();
+    cy.url().should("include",`http://localhost:3000/reviews/64a971123e2ec800cbcd3af9`)
   });
 });
 

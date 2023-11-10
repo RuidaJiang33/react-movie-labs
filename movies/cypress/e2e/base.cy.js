@@ -15,7 +15,7 @@ describe("Base tests", () => {
       });
   });
   beforeEach(() => {
-    cy.visit("/");
+    cy.visit("/home");
   });
 
   describe("The Discover Movies page", () => {

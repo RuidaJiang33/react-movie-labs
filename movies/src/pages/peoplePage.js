@@ -12,9 +12,7 @@ const PeoplePage = () => {
   const { page } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location)
   const queryParams = new URLSearchParams(location.search);
-  console.log(queryParams)
   const initialPage = Number(queryParams.get('page')) || 1;
 
   const { data, error, isLoading, isError, refetch } = useQuery(['people', { page }], getPeopleList)

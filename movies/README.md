@@ -3,17 +3,26 @@
 Name: Ruida Jiang
 
 ## Overview.
-
-[A brief statement on the content of this repository.]
+Extend the App: 
+    New static and parameterised endpoints.
+    Movie details contains links to actors and actor details links to movies.
+Extend the functionality:
+    Caching with react-query is done on all static and parameterised endpoints
+    New filtering - peopleFliter is added
+Additional features:
+    Refactor siteHeader component with Menu and MenuItem
+    Add several new features (pagination and authentication with Firebase)
 
 ### Features.
-[ A bullet-point list of the __new features__ you added to the Movies Fan app (and any modifications to existing features) .]
- 
-+ Feature 1
-+ Feature 2
-+ Feature 3
-+ etc
-+ etc
++ Refactor siteHeader component: 
+    Use Menu and MenuItem from materialUI to display a list of choices on a temporary surface and Use useNavigate to navigate to different addresses(/home, /movies/favorites, /movies/upcoming....)
++ New endpoints: 
+    Add new static endpoints from TMDB including /movies/mustWatch, /movies/topRated; Parameterised endpoints including /people/:id/images, /people/:id, /people/page/:page
+    User can visit people pages to get information of popular actors and actresses (/people/page/:page); User can also search different names of people to get relative results. (filterPeople)
+    When user click photos at peoplecards will enter people detail page (/people/:id), which show detail information of specific information including movie credits. In that page, user can click photos of movies to enter movies detail pages. 
+    User can click 'MEDIA' link in people detail headers to watch more actors' or actress' photos (/people/:id/images)
++ Authentication by firebase
+    When user visit the web app, they will visit login page first; User can login, signup and logout with firebase authentication.
 
 ## Setup requirements.
 
@@ -21,26 +30,23 @@ Name: Ruida Jiang
 
 ## API endpoints.
 
-[ List the __additional__ TMDB endpoints used, giving the description and pathname for each one.] 
-
-e.g.
-+ Discover list of movies - discover/movie
-+ Movie details - movie/:id
-+ Movie genres = /genre/movie/list
++ Get a list of people ordered by popularity - person/popular
++ Query the top level details of a person - person/${id}
++ Get the profile images that belong to a person - person/${id}/images
++ Get the movie credits for a person - person/${id}/movie_credits
++ Get the people credits for a movie - movie/${id}/credits
++ Get a list of movies ordered by rating - movie/top_rated
 
 ## Routing.
 
-[ List the __new routes__ supported by your app and state the associated page.]
-
-+ /blogs - displays all published blogs.
-+ /blogs/:id - displays a particular blog.
-+ /blogs/:id/comments - detail view of a particular blog and its comments.
-+ etc.
-
-[If relevant, state what aspects of your app are protected (i.e. require authentication) and what is public.]
++ /movies/topRated - displays list of top rated movies（protected）
++ /people/page/:page - displays list of people（protected）
++ /people/:id - people details including movie credits（protected）
++ /people/:id/images - images of specific person（protected）
++ / - login by email and password (public)
++ /signup - signup a new account by email and password (public)
 
 ## Independent learning (If relevant).
 
-Itemize the technologies/techniques you researched independently and adopted in your project, 
-i.e. aspects not covered in the lectures/labs. Include the source code filenames that illustrate these 
-(we do not require code excerpts) and provide references to the online resources that helped you (articles/blogs).
+I read the output result of the corresponding api on TMDB, and then selected the required api after comparison; Then I read the document on the official website of materialUI, learned the usage of Menu, Paper, Card and other components, and applied them to my project.
+To research Firebase certification, I looked at the official Firebase documentation and watched some tutorials, including some on YouTube.

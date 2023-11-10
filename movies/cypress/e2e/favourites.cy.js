@@ -14,7 +14,7 @@ describe("The favourites feature", () => {
       });
   });
   beforeEach(() => {
-    cy.visit("/");
+    cy.visit("/home");
   });
 
   describe("Selecting favourites", () => {
@@ -30,8 +30,10 @@ describe("The favourites feature", () => {
       // Select two favourites and navigate to Favourites page
       cy.get("button[aria-label='add to favorites']").eq(1).click();
       cy.get("button[aria-label='add to favorites']").eq(3).click();
-      cy.get("button").contains("Favorites").click();
-    });
+      cy.get('#user_button').click();
+      cy.get('li[tabindex="0"]').click();
+      });
+    
     it("only the tagged movies are listed", () => {
       cy.get(".MuiCardHeader-content").should("have.length", 2);
       cy.get(".MuiCardHeader-content")

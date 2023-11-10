@@ -14,7 +14,7 @@ describe("Navigation", () => {
       });
   });
   beforeEach(() => {
-    cy.visit("/");
+    cy.visit("/home");
   });
   describe("From the home page to a movie's details", () => {
     it("navigates to the movie details page and change browser URL", () => {
@@ -25,33 +25,22 @@ describe("Navigation", () => {
   describe("Using the site header", () => {
     describe("when the viewport is desktop scale", () => {
       it("navigate via the button links", () => {
-        cy.get("button").contains("Favorites").click();
+        cy.get('#movies_button').click();
+        cy.get('li[tabindex="0"]').click();
+        cy.url().should("include", `/home`);
+        cy.get('body').click(0, 100);
+        cy.get('#user_button').click();
+        cy.get('li[tabindex="0"]').click();
         cy.url().should("include", `/favorites`);
-        cy.get("button").contains("Home").click();
-        cy.url().should("include", `/`);
       });
     });
-    describe(
-      "when the viewport is mobile scale",
-      {
-        viewportHeight: 896,
-        viewportWidth: 414,
-      },
-      () => {
-        it("navigate via the dropdown menu", () => {
-          cy.get("header").find("button").click();
-          cy.get("li").contains('Favorites').click();
-          cy.url().should("include", `/favorites`);
-          cy.get("li").contains('Home').click();
-          cy.url().should("include", `/`);
-        });
-      }
-    );
   });
   describe("From the favourites page to a movie's details", () => {
     it("navigates to the movie details page and change browser URL", () => {
       cy.get("button[aria-label='add to favorites']").eq(1).click();
-      cy.get("button").contains("Favorites").click();
+      cy.get('#user_button').click();
+      cy.get('li[tabindex="0"]').click();
+      cy.get('body').click(0, 100);
       cy.get(".MuiCardActions-root").eq(0).contains("More Info").click();
       cy.url().should("include", `/movies/${movies[1].id}`);
     });

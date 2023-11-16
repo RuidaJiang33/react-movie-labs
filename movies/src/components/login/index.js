@@ -26,7 +26,7 @@ const Login = () => {
       await login(emailRef.current.value, passwordRef.current.value)
       navigate('/home');
     } catch {
-      setError('Failed to create an account')
+      setError('Failed to log in')
     }
     setLoading(false);
   }

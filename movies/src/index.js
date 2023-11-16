@@ -31,17 +31,13 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  //new
-  // const location = useLocation();
-  // const hideSiteHeader = location.pathname === '/' || location.pathname === '/signup';
+
   
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>     
         <MoviesContextProvider>
           <AuthProvider>
-            {/* new */}
-          {/* {!hideSiteHeader && <SiteHeader />}  */}
           <SiteHeader />
             <Routes>
               <Route path="/reviews/form" element={<AddMovieReviewPage />} />

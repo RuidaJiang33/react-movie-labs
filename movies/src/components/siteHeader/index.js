@@ -12,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useAuth } from '../../contexts/authContext';
+import { useLocation } from "react-router-dom";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
@@ -19,6 +20,8 @@ const SiteHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [activeButton, setActiveButton] = useState(null);
   const { logout } = useAuth();
+  const location = useLocation();
+
 
   const open = Boolean(anchorEl);
 
@@ -26,6 +29,12 @@ const SiteHeader = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const navigate = useNavigate();
+
+  const hideSiteHeader = location.pathname === '/' || location.pathname === '/signup';
+
+  if (hideSiteHeader) {
+    return <></>;
+  }
 
   const handleMenuSelect = (pageURL) => {
     navigate(pageURL, { replace: true });

@@ -19,6 +19,7 @@ const PeopleDetailsPage = () => {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
+  console.log(people);
 
   return (
     <>
